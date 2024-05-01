@@ -11,7 +11,6 @@ const router = (app) => {
 
   // to be evaluated at a later time
   app.get('/maker', mid.requiresLogin, controllers.Player.getResponse);
-  // app.post('/maker', mid.requiresLogin, controllers.Domo.makeDomo);
 
   app.get('/', controllers.Account.loginPage);
 
