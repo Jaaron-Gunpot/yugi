@@ -43,6 +43,8 @@ const handleCard = (e, triggerReload) => {
     const attack = document.getElementById('cardAtk').value;
     const defense = document.getElementById('cardDef').value;
 
+    //tiny bit of hardcoded data but coould be worse
+    //names are confusing
     const data = {
         name,
         type:"Monster",
@@ -59,6 +61,7 @@ const handleCard = (e, triggerReload) => {
 };
 
 const CardHolder = (props) => {
+    //I will understand this one day
     const [atk, setAtk] = useState(props.atk);
     const [def, setDef] = useState(props.def);
     const [name, setName] = useState(props.name);
@@ -169,6 +172,7 @@ const CardForm = (props) => {
             </div>
             <div id="effect">
                 <label for="cardEffect">Effect:</label>
+                {/* why cant i get the values and put them in props */}
                 <textarea id="cardEffect" onChange={document.querySelector}></textarea>
             </div>
             <div id="atk">
