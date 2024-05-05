@@ -65,6 +65,14 @@ const CardHolder = (props) => {
     const [atk, setAtk] = useState(props.atk);
     const [def, setDef] = useState(props.def);
     const [name, setName] = useState(props.name);
+    
+    console.log(props.name);
+
+    useEffect(() => {
+        setAtk(props.atk);
+        setDef(props.def);
+        setName(props.name);
+    }, [props.reload]);
 
     let effect;
 
@@ -133,27 +141,37 @@ const CardHolder = (props) => {
     )
 }
 
+let cardName = "";
+let cardType = "";
+let cardAttribute = "";
+
 const CardForm = (props) => {
+    let attack = 0;
+    const [reloadCard, setReloadCard] = useState(false);
+    if(cardType === "") cardType = "Effect";
+    if(cardAttribute === "") cardAttribute = "dark";
+
     return (<>
         <div id="cardMaker">
             <div id="name">
                 <label for="cardName">Name:</label>
-                <input type="text" id="cardName" onChange={document.querySelector}/>
+                <input type="text" id="cardName" onInput={(e)=>{cardName = e.target.value; setReloadCard(!reloadCard)}}/>
             </div>
             <div id="type">
                 <label for="cardType">Type:</label>
-                <select type="select" id="cardType" onChange={document.querySelector}>
-                    <option value="Main Deck">Effect</option>
+                <select type="select" id="cardType" onChange={(e)=>{cardType = e.target.value; setReloadCard(!reloadCard)}}>
+                    <option value="Effect" selected>Effect</option>
                     <option value="Normal">Normal</option>
                     <option value="Fusion">Fusion</option>
                     <option value="Synchro">Synchro</option>
+                    <option value="XYZ">XYZ</option>
                     <option value="Ritual">Ritual</option>
                 </select>
             </div>
             <div id="attribute">
                 <label for="cardAttribute">Attribute:</label>
-                <select type="select" id="cardAttribute">
-                    <option value="dark">Dark</option>
+                <select type="select" id="cardAttribute" onChange={(e)=>{cardAttribute = e.target.value; setReloadCard(!reloadCard)}}>
+                    <option value="dark" selected>Dark</option>
                     <option value="divine">Divine</option>
                     <option value="earth">Earth</option>
                     <option value="fire">Fire</option>
@@ -186,10 +204,11 @@ const CardForm = (props) => {
         </div>
         <button onClick={(e) => handleCard(e, props.triggerReload)}>Submit</button>
         <CardHolder
-            base={`/assets/yugioh-assets/yugioh-art/fusion.png`}
+            name={cardName}
+            base={`/assets/yugioh-assets/yugioh-art/${cardType.toLowerCase()}.png`}
             cardEffect={document.getElementById("cardEffect")}
-            attribute="/assets/yugioh-assets/yugioh-art/dark.png"
-            triggerReload={()=>{setReloadCard(!reloadCard)}}
+            attribute={`/assets/yugioh-assets/yugioh-art/${cardAttribute.toLowerCase()}.png`}
+            reload={reloadCard}
         />
     </>
     )

@@ -41,7 +41,7 @@ const cardSchema = new mongoose.Schema({
   cardType: {
     type: String,
     required: true,
-    enum: ['Main Deck', 'Xyz', 'Fusion', 'Synchro', 'Link'],
+    enum: ['Normal','Effect', 'Fusion', 'Synchro', 'XYZ','Link','Ritual'],
   },
   linkRating: {
     type: Number,
